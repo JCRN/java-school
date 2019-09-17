@@ -25,16 +25,15 @@ public class CourseController
     @GetMapping(value = "/courses", produces = {"application/json"})
     public ResponseEntity<?> listAllCourses(HttpServletRequest request)
     {
-        logger.trace("accessed at trace level");
-        logger.trace("accessed at debug level");
         logger.info(request.getMethod().toUpperCase() + " " + request.getRequestURI() + "accessed at info level");
         ArrayList<Course> myCourses = courseService.findAll();
         return new ResponseEntity<>(myCourses, HttpStatus.OK);
     }
 
     @GetMapping(value = "/studcount", produces = {"application/json"})
-    public ResponseEntity<?> getCountStudentsInCourses()
+    public ResponseEntity<?> getCountStudentsInCourses(HttpServletRequest request)
     {
+        logger.info(request.getMethod().toUpperCase() + " " + request.getRequestURI() + "accessed at info level");
         return new ResponseEntity<>(courseService.getCountStudentsInCourse(), HttpStatus.OK);
     }
 
