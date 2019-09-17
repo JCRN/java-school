@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 @RestController
@@ -22,9 +23,11 @@ public class CourseController
     private CourseService courseService;
 
     @GetMapping(value = "/courses", produces = {"application/json"})
-    public ResponseEntity<?> listAllCourses()
+    public ResponseEntity<?> listAllCourses(HttpServletRequest request)
     {
-        logger.info("accessed at info level");
+        logger.trace("accessed at trace level");
+        logger.trace("accessed at debug level");
+        logger.info(request.getMethod().toUpperCase() + " " + request.getRequestURI() + "accessed at info level");
         ArrayList<Course> myCourses = courseService.findAll();
         return new ResponseEntity<>(myCourses, HttpStatus.OK);
     }
